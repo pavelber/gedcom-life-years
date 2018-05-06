@@ -16,8 +16,8 @@ object ReadGedcom {
         val filtered2 = filtered1.filter { p-> getYear(p,IndividualEventType.DEATH)>1945 || getYear(p,IndividualEventType.DEATH) < 1941}
         println(filtered2.size)
         val people = filtered2.map{i->Person(getYear(i,IndividualEventType.BIRTH), getYear(i,IndividualEventType.DEATH))}
-        val grouped = people.groupBy { p->p.birthYear }.toSortedMap()
-        grouped.keys.forEach{year-> println("$year\t${average(grouped.get(year))}")}
+        val grouped = people.groupBy { p->p.birthYear/10 }.toSortedMap()
+        grouped.keys.forEach{year-> println("${year*10}\t${average(grouped.get(year))}\t${grouped.get(year)?.size}")}
 
     }
 
